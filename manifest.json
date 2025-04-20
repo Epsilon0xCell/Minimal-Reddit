@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Reddit Wiki Only",
+  "version": "1.0",
+  "description": "Redirects subreddit pages to their wikis.",
+  "permissions": ["webRequest", "webRequestBlocking", "declarativeNetRequest", "tabs"],
+  "host_permissions": ["*://www.reddit.com/r/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Reddit Wiki Only"
+  }
+}
