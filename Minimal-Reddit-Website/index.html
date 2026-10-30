@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minimal-Reddit</title>
+<!-- pages-campaign site for Epsilon0xCell/Minimal-Reddit; source of truth: Minimal-Reddit-Website/ on the default branch -->
+<style>
+/* I kept this page to one narrow column on white because the extension itself removes things. If I had filled the page with boxes and color, the page would argue against the tool it describes. */
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#161616;font-family:Charter,Georgia,"Times New Roman",serif;font-size:18px;line-height:1.65}
+main{max-width:620px;margin:0 auto;padding:72px 24px 96px}
+img.banner{width:100%;height:auto;display:block;border:1px solid #ddd}
+img.mark{width:56px;height:56px;display:block;margin:56px 0 20px}
+h1{font-size:42px;line-height:1.1;margin:0 0 12px;font-weight:700;letter-spacing:-.01em}
+p.lede{font-size:20px;color:#333;margin:0 0 8px}
+.badges{margin:28px 0 8px;line-height:2}
+.badges img{vertical-align:middle;margin-right:6px}
+h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;font-family:Helvetica,Arial,sans-serif;font-weight:700;margin:64px 0 16px;padding-top:20px;border-top:2px solid #161616}
+p{margin:0 0 18px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:15px;background:#f4f4f4;padding:1px 5px}
+table{width:100%;border-collapse:collapse;font-size:16px;margin:8px 0 8px}
+td,th{border-top:1px solid #ccc;padding:10px 8px 10px 0;text-align:left;vertical-align:top}
+th{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#555}
+td.verdict{white-space:nowrap;font-family:Helvetica,Arial,sans-serif;font-size:14px}
+ul.plain{list-style:none;padding:0;margin:0}
+ul.plain li{border-top:1px solid #ddd;padding:12px 0}
+.chips{font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#333}
+.chips span{border:1px solid #999;padding:3px 9px;margin:0 6px 8px 0;display:inline-block}
+.note{font-size:16px;color:#333;border-left:3px solid #161616;padding-left:16px}
+a{color:#161616;text-decoration:underline;text-underline-offset:3px}
+footer{margin-top:72px;padding-top:16px;border-top:1px solid #ccc;font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<main>
+<!-- I put the banner small and plain at the top. This page is a digest, not a poster, and the whitespace below it is the point. -->
+<img class="banner" src="https://raw.githubusercontent.com/Epsilon0xCell/Minimal-Reddit/main/banner.png" alt="Minimal-Reddit banner">
+<img class="mark" src="https://raw.githubusercontent.com/Epsilon0xCell/Minimal-Reddit/main/logo.png" alt="Minimal-Reddit logo">
+<h1>Minimal-Reddit</h1>
+<p class="lede">A small browser extension that sends you to a subreddit wiki instead of its post feed.</p>
+<div class="badges">
+<img src="https://img.shields.io/github/stars/Epsilon0xCell/Minimal-Reddit" alt="Stars">
+<img src="https://img.shields.io/github/forks/Epsilon0xCell/Minimal-Reddit" alt="Forks">
+<img src="https://img.shields.io/github/last-commit/Epsilon0xCell/Minimal-Reddit" alt="Last commit">
+<img src="https://img.shields.io/github/languages/top/Epsilon0xCell/Minimal-Reddit" alt="Top language">
+<img src="https://img.shields.io/github/repo-size/Epsilon0xCell/Minimal-Reddit" alt="Repo size">
+</div>
+
+<h2>What this is</h2>
+<p>I wrote this because I wanted the wiki, not the feed. When I open a subreddit root page, I usually want the collected information that subreddit keeps for itself. The feed is the opposite of that. So the extension watches for one kind of page and sends it to one other place.</p>
+<p>That is the whole tool. It lives in two files, <code>background.js</code> and <code>manifest.json</code>. There is no options page, no settings, and nothing to configure. If a page is not a subreddit root on <code>www.reddit.com</code>, the extension leaves it alone.</p>
+<p>I kept it on manifest version 2 on purpose. The listener has to run before the request leaves and change where it goes, and that needs <code>webRequestBlocking</code>. Version 3 took that away from ordinary extensions, so a move to version 3 is a rewrite, not a settings change.</p>
+
+<h2>The index</h2>
+<!-- I set the behavior as a ruled index because that is all a reader needs to check me: page in, result out, nothing in between dressed up. -->
+<table>
+<tr><th>Page you open</th><th>Result</th></tr>
+<tr><td><code>/r/python/</code> or <code>/r/python</code></td><td class="verdict">Redirects to <code>/r/python/wiki/index</code></td></tr>
+<tr><td>Subreddit root with a query, such as <code>?feed=new</code></td><td class="verdict">Redirects and keeps the query</td></tr>
+<tr><td>Post and comment pages</td><td class="verdict">Left alone</td></tr>
+<tr><td>Front page, user pages, search pages</td><td class="verdict">Left alone</td></tr>
+<tr><td><code>old.reddit.com</code></td><td class="verdict">Not covered</td></tr>
+</table>
+<p>The narrow scope comes from the manifest itself. Its permission is <code>*://www.reddit.com/r/*</code>, and the listener only takes top level page loads. The anchored pattern in <code>background.js</code> allows one optional trailing slash and nothing below the name, which is what keeps post pages out.</p>
+
+<h2>What I fixed in it</h2>
+<ul class="plain">
+<li>The redirect used to drop the query string. A link with feed or sorting choices lost them. It now appends <code>url.search</code>.</li>
+<li>The manifest used to name the extension Reddit Wiki Only. It now reads Minimal-Reddit, matching the repo and the browser action title.</li>
+<li>The wiki target has extra path after the subreddit name, so it fails the same anchored pattern. That is what stops a redirect loop.</li>
+</ul>
+
+<h2>Files and stack</h2>
+<p class="chips"><span>JavaScript</span><span>Manifest V2</span><span>webRequestBlocking</span><span>background.js, 1 listener</span><span>manifest.json</span></p>
+<p>Install: load the folder as an unpacked extension in a browser that still supports manifest version 2 with <code>webRequestBlocking</code>. The manifest asks for <code>webRequest</code>, <code>webRequestBlocking</code>, and <code>tabs</code>.</p>
+
+<h2>Honest note</h2>
+<p class="note">I verified this with a Node harness that stubs <code>chrome.webRequest</code> and drives the listener. Root pages redirected, the query case kept its query, and post pages and the front page returned no redirect. I did not load it in a real browser in that pass, so the permission behavior is as the manifest declares it, not as I observed it in a browser. The README says the same thing.</p>
+
+<p style="margin-top:40px"><a href="https://github.com/Epsilon0xCell/Minimal-Reddit">Read the code in the repo</a> &nbsp; <a href="https://github.com/Epsilon0xCell">My GitHub profile</a></p>
+<footer>Built by Epsilon0xCell. One file redirects, one file declares. Nothing else is in here, and that was the decision.</footer>
+</main>
+</body>
+</html>
