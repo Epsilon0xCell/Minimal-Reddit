@@ -1,3 +1,3 @@
 ![Banner](banner.png)
 
-# minimal-reddit
+# Minimal-Reddit
