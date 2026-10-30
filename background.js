@@ -6,7 +6,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     const subredditMatch = url.pathname.match(/^\/r\/([^\/]+)\/?$/);
     if (subredditMatch) {
       const subreddit = subredditMatch[1];
-      const redirectUrl = `https://www.reddit.com/r/${subreddit}/wiki/index`;
+      const redirectUrl = `https://www.reddit.com/r/${subreddit}/wiki/index${url.search}`;
       return { redirectUrl };
     }
 
