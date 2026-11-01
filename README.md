@@ -1,8 +1,18 @@
-![Banner](banner.png)
+![Intro: the old wood at first light, one blank tag waiting at chest height](intro-banner.png)
+
 
 # Minimal-Reddit
 
+![Banner](banner.png)
+
+![Scene](scene.svg)
+
+> **LEFT UNTOUCHED** · Post pages, comment pages, the front page, user pages, and search pages are left alone. Only a subreddit root page is redirected, and only on `www.reddit.com`.
+
 A small browser extension that sends you to a subreddit's wiki instead of its post feed.
+
+
+![Separator](sep-heavy.svg)
 
 ## What it does
 
@@ -12,9 +22,15 @@ When you open a subreddit root page on `www.reddit.com`, such as `https://www.re
 - Post pages, comment pages, the front page, user pages, and search pages are left alone.
 - Only `www.reddit.com` is covered: the manifest permission is `*://www.reddit.com/r/*`, so `old.reddit.com` and other Reddit hosts are not redirected.
 
+
+![Separator](sep-light.svg)
+
 ## Install
 
 Load the folder as an unpacked extension in a browser that still supports manifest version 2 extensions with the `webRequestBlocking` permission. The manifest declares `webRequest`, `webRequestBlocking`, and `tabs`.
+
+
+![Separator](sep-light.svg)
 
 ## Verified behaviour and limits
 
