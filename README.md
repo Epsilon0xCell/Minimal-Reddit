@@ -1,9 +1,11 @@
-![Intro: the old wood at first light, one blank tag waiting at chest height](intro-banner.png)
+![Intro: the stone bench reached at the end of the raked sand path, one red maple leaf settled on its seat, the rake lines arriving in calm parallels and the jumbled stones soft behind](intro-banner.png)
 
 
 # Minimal-Reddit
 
-![Banner](banner.png)
+<p align="center"><img src="logo.png" alt="Minimal-Reddit logo: a small raked sand circle seen from above, concentric rake rings around one smooth grey stone at the center, a single red maple leaf resting at the edge of the rings, moss all around" width="200"></p>
+
+![Banner: a broad raked sand garden in cream, a jumbled cluster of stones heaped at the left and one clean raked path curving away from them to a single stone bench under a maple branch at the right, moss green edges](banner.png)
 
 ![Scene](scene.svg)
 
