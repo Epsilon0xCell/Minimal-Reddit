@@ -3,49 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Minimal-Reddit: the census roll of the old wood</title>
+<title>Minimal-Reddit: the raked garden path</title>
 <meta name="description" content="A small browser extension that sends a subreddit root arrival onward to that subreddit's wiki index, and leaves everything else untouched.">
 <style>
-@font-face{font-family:'Bitter';src:url('fonts/Bitter.ttf') format('truetype')}
+@font-face{font-family:'Julius Sans One';src:url('fonts/JuliusSansOne-Regular.ttf') format('truetype')}
+@font-face{font-family:'Lato';src:url('fonts/Lato-Regular.ttf') format('truetype');font-weight:400}
+@font-face{font-family:'Lato';src:url('fonts/Lato-Bold.ttf') format('truetype');font-weight:700}
+@font-face{font-family:'Lato';src:url('fonts/Lato-Black.ttf') format('truetype');font-weight:900}
 *{box-sizing:border-box}
-body{margin:0;background:#f3ead3;color:#1e2b1c;font-family:'Bitter',Georgia,serif;line-height:1.75;font-size:17.5px}
-header{background:#1e3d24;color:#f3ead3;padding:30px 22px 24px;text-align:center}
-header h1{margin:0;font-size:2.1rem;letter-spacing:.06em}
-header p{color:#d8c98f;margin:6px 0 0}
+body{margin:0;background:#f1ead6;color:#26302a;font-family:'Lato',sans-serif;line-height:1.7;font-size:17px}
+header{background:#31473a;color:#f1ead6;padding:32px 22px 26px;text-align:center}
+header h1{font-family:'Julius Sans One',sans-serif;margin:0;font-size:2.3rem;letter-spacing:.1em;font-weight:400}
+header p{color:#cfd8bd;margin:8px 0 0;letter-spacing:.03em}
 main{max-width:760px;margin:0 auto;padding:24px 22px 10px}
 img.hero{width:100%;height:auto}
-.num{display:inline-block;background:#5a4230;color:#e8c95a;font-weight:700;padding:.05em .5em;margin-right:.6em}
-h2{font-size:1.25rem;margin:0 0 8px}
-.entry{background:#f8f2df;border-top:4px double #5a4230;padding:18px 22px;margin:22px 0;position:relative}
-.entry::before{content:'';position:absolute;left:0;right:0;top:34px;bottom:0;background:repeating-linear-gradient(#f8f2df,#f8f2df 30px,#e7dcbc 31px);z-index:0}
+.num{display:inline-block;background:#8b8f7d;color:#f6f1de;font-weight:900;padding:.05em .5em;margin-right:.6em;border-radius:2px}
+h2{font-family:'Julius Sans One',sans-serif;font-size:1.3rem;letter-spacing:.04em;font-weight:400;margin:0 0 8px}
+.entry{background:#faf6e9;border-top:3px solid #b9bfa4;padding:18px 22px;margin:22px 0;position:relative;box-shadow:0 1px 0 #d8d2ba}
+.entry::before{content:'';position:absolute;left:0;right:0;top:34px;bottom:0;background:repeating-linear-gradient(#faf6e9,#faf6e9 30px,#eee7cf 31px);z-index:0}
 .entry>*{position:relative}
-.great{background:#efe6c8;border:2px solid #1e3d24}
-.tagbtn{display:inline-block;background:#f3ead3;color:#1e3d24;border:2px solid #5a4230;padding:.5rem 1.05rem;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;font-size:.85rem;margin:.9rem .25rem .25rem;position:relative;transition:transform .15s}
-.tagbtn::before{content:'';position:absolute;left:50%;top:-14px;width:2px;height:12px;background:#8a6f3c}
+.great{background:#f0ead2;border:2px solid #31473a}
+.tagbtn{display:inline-block;background:#faf6e9;color:#31473a;border:2px solid #6d7a5f;padding:.5rem 1.05rem;text-transform:uppercase;letter-spacing:.09em;text-decoration:none;font-size:.82rem;font-weight:700;margin:.9rem .25rem .25rem;position:relative;transition:transform .15s}
+.tagbtn::before{content:'';position:absolute;left:50%;top:-14px;width:2px;height:12px;background:#9aa583}
 .tagbtn:hover{transform:translateY(-2px)}
 .tagbtn:active{transform:translateY(1px)}
-.tagbtn:active::after{content:'';position:absolute;right:6px;bottom:5px;width:11px;height:11px;border-radius:50%;background:#b03030}
-a{color:#8a6f14;text-decoration:underline #2e5a34 1px;text-underline-offset:3px}
+.tagbtn:active::after{content:'';position:absolute;right:6px;bottom:5px;width:11px;height:11px;border-radius:50%;background:#b3352b}
+a{color:#7a6414;text-decoration:underline #4a6b52 1px;text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
-a:visited{color:#7a5c2e}
-.twine{border:0;border-top:3px solid #c9b98a;position:relative;margin:36px 0}
-.twine i{position:absolute;top:-9px;width:4px;height:16px;background:#c9a227}
+a:visited{color:#6f6242}
+.twine{border:0;border-top:3px solid #c3bd9e;position:relative;margin:36px 0}
+.twine i{position:absolute;top:-9px;width:4px;height:16px;background:#b3352b}
 .twine i:nth-child(1){left:50%}
 .heavy i:nth-child(1){left:38%}.heavy i:nth-child(2){left:50%}.heavy i:nth-child(3){left:62%}
-pre{background:#243020;color:#f3ead3;padding:14px 18px;overflow-x:auto;font-size:.86rem}
+pre{background:#26302a;color:#f1ead6;padding:14px 18px;overflow-x:auto;font-size:.86rem}
 table{border-collapse:collapse;width:100%}
-td,th{border-bottom:1px solid #c9b98a;padding:.4rem .55rem;text-align:left;vertical-align:top}
-.ledger{border-right:14px solid #5a4230}
+td,th{border-bottom:1px solid #c3bd9e;padding:.4rem .55rem;text-align:left;vertical-align:top}
+.ledger{border-right:14px solid #6d7a5f}
 .badges img{height:20px}
 .shots img{width:100%;height:auto;margin:8px 0}
-footer{max-width:760px;margin:0 auto;padding:16px 22px 42px;color:#5a5240}
-.twinefoot{height:5px;background:repeating-linear-gradient(45deg,#c9b98a,#c9b98a 8px,#a8945e 8px,#a8945e 16px);margin-bottom:12px}
+footer{max-width:760px;margin:0 auto;padding:16px 22px 42px;color:#5c5747}
+.twinefoot{height:5px;background:repeating-linear-gradient(45deg,#c3bd9e,#c3bd9e 8px,#9aa583 8px,#9aa583 16px);margin-bottom:12px}
 </style>
 </head>
 <body>
-<header><h1>Minimal-Reddit</h1><p>The census roll of the old wood: counted entries, in order.</p></header>
+<header><h1>Minimal-Reddit</h1><p>The garden path: past the noisy stones, to the quiet bench.</p></header>
 <main>
-<img class="hero" src="https://raw.githubusercontent.com/Epsilon0xCell/Minimal-Reddit/main/banner.png" alt="The census clearing with the tally board at the great oak">
+<img class="hero" src="https://raw.githubusercontent.com/Epsilon0xCell/Minimal-Reddit/main/banner.png" alt="A broad raked sand garden in cream, a jumbled cluster of stones heaped at the left and one clean raked path curving away from them to a single stone bench under a maple branch at the right">
 <p><a class="tagbtn" href="https://github.com/Epsilon0xCell/Minimal-Reddit">Open the repo</a> <a class="tagbtn" href="#install">Install</a> <a class="tagbtn" href="#record">The record</a></p>
 <div class="badges">
 <img src="https://img.shields.io/github/stars/Epsilon0xCell/Minimal-Reddit" alt="GitHub stars">
@@ -56,12 +59,12 @@ footer{max-width:760px;margin:0 auto;padding:16px 22px 42px;color:#5a5240}
 <img src="https://img.shields.io/github/license/Epsilon0xCell/Minimal-Reddit" alt="License, MIT">
 </div>
 <p>Two files do the work: <code>background.js</code>, 43 lines, and <code>manifest.json</code>, 19 lines.</p>
-<section class="entry great"><h2><span class="num">1</span>The great oak's entry: what it does</h2>
+<section class="entry great"><h2><span class="num">1</span>The bench entry: what it does</h2>
 <p>When you open a subreddit root page on <code>www.reddit.com</code>, such as <code>https://www.reddit.com/r/python/</code>, the extension redirects you to that subreddit's wiki index, <code>https://www.reddit.com/r/python/wiki/index</code>, keeping any query string on the original URL. Every other address is left exactly as it was: individual posts, comment threads, search results, and user pages are not redirected, not altered, not touched.</p>
 </section>
 <hr class="twine heavy"><i></i><i></i><i></i>
 <section class="entry"><h2><span class="num">2</span>How it decides</h2>
-<p>The taker intervenes only at the trunk, at the root. A visitor already on a branch path walks it undisturbed.</p>
+<p>The redirect intervenes only at the root. A visitor already deeper in the garden walks on undisturbed.</p>
 <ul>
 <li>Subreddit root pages (<code>/r/&lt;name&gt;</code> with or without a trailing slash) redirect.</li>
 <li>Post pages, comment pages, the front page, user pages, and search pages are left alone.</li>
@@ -102,7 +105,7 @@ https://www.reddit.com/  =&gt;  {}
 https://www.reddit.com/r/python/wiki/index  =&gt;  {}</pre>
 </section>
 <hr class="twine"><i></i>
-<section class="entry" id="install"><h2><span class="num">6</span>Installing, in tally order</h2>
+<section class="entry" id="install"><h2><span class="num">6</span>Installing, in rake order</h2>
 <ol>
 <li>Take the repo folder as it stands.</li>
 <li>Load the folder as an unpacked extension in a browser that still supports manifest version 2 extensions with the <code>webRequestBlocking</code> permission.</li>
@@ -121,10 +124,10 @@ https://www.reddit.com/r/python/wiki/index  =&gt;  {}</pre>
 </section>
 <section class="entry"><h2><span class="num">8</span>Questions, as marginal tallies</h2>
 <p><b>Does it block or filter anything?</b> No. No blocking, no filtering, no redesign of Reddit pages, no account tools.</p>
-<p><b>Was it loaded in a real browser?</b> Not in this pass. Behaviour was verified with the Node harness above, so browser side permission behaviour is as the manifest declares it, not as observed.</p>
+<p><b>Was it loaded in a real browser?</b> Not in this check. Behaviour was verified with the Node harness above, so browser side permission behaviour is as the manifest declares it, not as observed.</p>
 <p><a href="https://github.com/Epsilon0xCell/Minimal-Reddit">Read the code in the repo</a> · <a href="https://github.com/Epsilon0xCell">My GitHub profile</a></p>
 </section>
 </main>
-<footer><div class="twinefoot"></div>Licence: MIT (see the LICENSE file in the repo). Fonts: Bitter, SIL Open Font License 1.1, license text beside the font file on this site. The roll, tied shut.</footer>
+<footer><div class="twinefoot"></div>Licence: MIT (see the LICENSE file in the repo). Fonts: Julius Sans One and Lato, SIL Open Font License 1.1, self-hosted, license texts beside the font files on this site. The path, raked clean.</footer>
 </body>
 </html>
